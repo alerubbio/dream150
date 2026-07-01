@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+
+# Generated output
+*.out.csv
+*.out.json
+dream150.csv
+dream150.json
+
+# Local ICP configs (keep your real targeting out of git)
+icp.local.yaml
+icp.*.local.yaml
+
+# OS
+.DS_Store

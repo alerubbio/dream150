@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dream150"
+version = "0.1.0"
+description = "Bring your own ICP, get a ranked Dream 150 of nonprofits from free public IRS data."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Alejandro Rubio" }]
+keywords = ["nonprofit", "irs", "990", "propublica", "prospecting", "gtm", "icp"]
+dependencies = ["PyYAML>=6.0"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[project.scripts]
+dream150 = "dream150.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/alerubbio/dream150"
+
+[tool.setuptools.packages.find]
+include = ["dream150*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

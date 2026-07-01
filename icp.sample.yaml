@@ -1,0 +1,46 @@
+# ===========================================================================
+# SAMPLE ICP  —  this is a neutral example, NOT anyone's real targeting.
+# Copy it to icp.local.yaml (gitignored) and edit for your own ideal customer.
+#
+# It targets mid-size human-services nonprofits nationally, the kind of broad,
+# generic profile you would refine before a real run. Every field is optional;
+# anything you omit falls back to a sensible default.
+# ===========================================================================
+
+name: "Sample ICP — mid-size human-services nonprofits"
+
+# --- search: narrows the pull server-side, before anything is downloaded ---
+search:
+  query: "food bank"     # free-text; set to null to match on filters alone
+  state: null            # two-letter code (e.g. "CA"), or null for national
+  ntee_major: 5          # ProPublica major group. 5 = Human Services.
+                         #   1 Arts  2 Education  3 Environment/Animals
+                         #   4 Health  5 Human Services  6 International
+                         #   7 Public/Societal  8 Religion  9 Membership
+                         #   10 Unclassified. Set null to skip.
+  subsection_code: 3     # 3 = 501(c)(3). Set null to skip.
+
+# --- filters: applied locally after each org's detail is fetched ------------
+filters:
+  ntee_prefixes: ["P", "K"]   # keep only these fine NTEE codes (P = Human
+                              # Services, K = Food/Agriculture). [] to skip.
+  min_revenue: 5000000        # drop orgs below $5M total revenue
+  max_revenue: 250000000      # drop orgs above $250M
+
+# --- scoring: the SAMPLE default model. Retune or zero-out any weight. -------
+scoring:
+  reference_year: 2024              # "current" year for filing-recency math
+  revenue_sweet_spot: [10000000, 100000000]  # full revenue_fit credit in-band
+  recency_full_credit_years: 2      # filings this fresh get full recency credit
+  weights:
+    revenue_fit: 0.5        # how well revenue fits your band + sweet spot
+    recency: 0.25           # how recent the latest filing is
+    financial_health: 0.25  # reports revenue + expenses, runs near balance
+
+# --- output ------------------------------------------------------------------
+output:
+  top_n: 150   # your "Dream N"
+
+# --- suppression (optional): a do-not-contact list -------------------------
+suppression:
+  file: null   # path to a CSV with ein/domain columns, or null
