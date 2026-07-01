@@ -1,5 +1,9 @@
 # dream150
 
+[![tests](https://github.com/alerubbio/dream150/actions/workflows/tests.yml/badge.svg)](https://github.com/alerubbio/dream150/actions/workflows/tests.yml)
+[![python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/)
+[![license: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+
 **Bring your own ICP, get a ranked "Dream 150" of nonprofits — from free public IRS data.**
 
 You describe your ideal nonprofit customer in a small YAML file (cause area, revenue band, geography, size). `dream150` searches the [ProPublica Nonprofit Explorer](https://projects.propublica.org/nonprofits/api) — a free, no-key API over public IRS Form 990 data — enriches each match with its latest financials, scores it for fit, and hands back a ranked, exportable list.
@@ -42,7 +46,15 @@ Requires Python 3.9+. The only runtime dependency is PyYAML.
    dream150 run --config icp.local.yaml --out dream.csv --json
    ```
 
-You get `dream.csv` (and `dream.json`) ranked best-fit first, with a score breakdown per org and a link to each ProPublica profile and 990 PDF.
+You get `dream.csv` (and `dream.json`) ranked best-fit first, with a score breakdown per org and a link to each ProPublica profile and 990 PDF. A real sample output is committed at [`examples/food-banks.csv`](examples/food-banks.csv):
+
+| rank | name | state | latest_revenue | score | revenue_fit | recency | financial_health |
+|--:|---|---|--:|--:|--:|--:|--:|
+| 1 | Manna Food Bank | NC | 37,885,817 | 100.0 | 1.0 | 1.0 | 1.0 |
+| 2 | United Food Bank | AZ | 45,985,490 | 100.0 | 1.0 | 1.0 | 1.0 |
+| 3 | Weld Food Bank | CO | 25,594,470 | 100.0 | 1.0 | 1.0 | 1.0 |
+
+_(Generated from [`icp.sample.yaml`](icp.sample.yaml) with `--top-n 15`. The sample ICP is a neutral example, not anyone's real targeting.)_
 
 ### Other commands
 
