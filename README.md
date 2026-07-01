@@ -133,7 +133,7 @@ Tests run **fully offline** against recorded API fixtures in `tests/fixtures/`, 
 
 ## Data & etiquette
 
-Data comes from the IRS via ProPublica's Nonprofit Explorer, which is free and public. The client is polite by default (a minimum interval between requests plus backoff on throttling); keep `--min-interval` reasonable on large runs. Please cite [ProPublica Nonprofit Explorer](https://projects.propublica.org/nonprofits/) as the data source, per their API terms.
+Data comes from the IRS via ProPublica's Nonprofit Explorer, which is free and public. The client is polite by default (a minimum interval between requests plus backoff on throttling); keep `--min-interval` reasonable on large runs. It's a global flag, so it goes *before* the subcommand: `dream150 --min-interval 0.5 run --config icp.yaml`. Please cite [ProPublica Nonprofit Explorer](https://projects.propublica.org/nonprofits/) as the data source, per their API terms.
 
 ## License
 
